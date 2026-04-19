@@ -16,30 +16,23 @@ private:
   static const char _name[];
   bool enabled = true;
 
-  uint8_t base = 40; // Hintergrund hell (weißlich)
-
   void fillAll(uint32_t color) {
     uint16_t count = strip.getLengthTotal();
     for (uint16_t i = 0; i < count; i++) strip.setPixelColor(i, color);
   }
 
-  // 👉 CLEAN PROGRESS BAR
   void drawProgressBar(float p) {
     uint16_t count = strip.getLengthTotal();
     if (count == 0) return;
 
     p = constrain(p, 0.0f, 1.0f);
-
-    // 👉 mindestens 1 LED immer aktiv
-    uint16_t lit = max(1, (uint16_t)(p * count));
+    uint16_t lit = max((uint16_t)1, (uint16_t)(p * count));
 
     for (uint16_t i = 0; i < count; i++) {
       if (i < lit) {
-        // Fortschritt = grün
         strip.setPixelColor(i, RGBW32(0,255,0,0));
       } else {
-        // Hintergrund = leicht weiß
-        strip.setPixelColor(i, RGBW32(base, base, base, 0));
+        strip.setPixelColor(i, RGBW32(255,255,255,0));
       }
     }
   }
@@ -100,34 +93,34 @@ public:
     float pulse = (sin(millis() * 0.002f) + 1.0f) * 0.5f;
     bool blink = ((millis() / 500) % 2) == 0;
 
-    // 🔴 Error
+    // 🔴 Error (dim ↔ hell)
     if (ps == "error") {
-      uint8_t v = blink ? 255 : base;
+      uint8_t v = 120 + (uint8_t)(135 * pulse);
       fillAll(RGBW32(v,0,0,0));
       return;
     }
 
-    // 🔵 Pause
+    // 🔵 Pause (dim ↔ hell)
     if (ps == "paused") {
-      uint8_t v = base + (uint8_t)(200 * pulse);
+      uint8_t v = 120 + (uint8_t)(135 * pulse);
       fillAll(RGBW32(0,0,v,0));
       return;
     }
 
-    // 🟢 Complete
+    // 🟢 Complete (blink dim ↔ hell)
     if (completeUntil > 0) {
       if (millis() < completeUntil) {
-        uint8_t v = blink ? 255 : base;
+        uint8_t v = blink ? 255 : 120;
         fillAll(RGBW32(0,v,0,0));
         return;
       }
       completeUntil = 0;
     }
 
-    // 🟡 Preheat (extended)
+    // 🟡 Preheat (dim ↔ hell)
     if (ps == "printing" && progress < 0.01f) {
-      uint8_t r = base + (uint8_t)(200 * pulse);
-      uint8_t g = base + (uint8_t)(100 * pulse);
+      uint8_t r = 120 + (uint8_t)(135 * pulse);
+      uint8_t g = 80 + (uint8_t)(100 * pulse);
       fillAll(RGBW32(r,g,0,0));
       return;
     }
@@ -140,14 +133,14 @@ public:
 
     // 🟡 Heating fallback
     if (heating) {
-      uint8_t r = base + (uint8_t)(200 * pulse);
-      uint8_t g = base + (uint8_t)(100 * pulse);
+      uint8_t r = 120 + (uint8_t)(135 * pulse);
+      uint8_t g = 80 + (uint8_t)(100 * pulse);
       fillAll(RGBW32(r,g,0,0));
       return;
     }
 
-    // 🔵 Idle
-    fillAll(RGBW32(0,180,255,0));
+    // ⚪ Idle
+    fillAll(RGBW32(255,255,255,0));
   }
 
   void addToConfig(JsonObject &root) override {
