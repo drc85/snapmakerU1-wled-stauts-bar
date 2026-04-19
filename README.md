@@ -18,21 +18,26 @@ enter your printer ip here, if necceary ur auth api, if u dont have auth - leave
 after reboting it wil show the status like this...
 
 
-LED Status Overview
+## LED Status Overview
 
-🔵 Idle / Standby
-Solid cyan-blue (soft light)
-🟡 Preparing / Preheat / Calibration
-Smooth pulsing orange (remains active until printing actually starts, including bed leveling and filament loading)
-🟢 Printing
-Apple-style green progress bar (16 LEDs)
-Smooth gradient with a bright moving head
-Always shows at least 1 LED, even at very low progress
-🔵 Paused
-Soft pulsing blue (distinct from idle and heating)
-🔴 Error
-Flashing red (dim ↔ bright, never fully off)
-🟢 Complete (Finished)
-Flashing green for ~10 seconds, then returns to idle
+- 🔵 **Idle / Standby**  
+  Solid cyan-blue (soft light)
+
+- 🟡 **Preparing / Preheat / Calibration**  
+  Smooth pulsing orange (remains active until printing actually starts, including bed leveling and filament loading)
+
+- 🟢 **Printing**  
+  Apple-style green progress bar (16 LEDs)  
+  - Smooth gradient with a bright moving head  
+  - Always shows at least 1 LED, even at very low progress
+
+- 🔵 **Paused**  
+  Soft pulsing blue (distinct from idle and heating)
+
+- 🔴 **Error**  
+  Flashing red (dim ↔ bright, never fully off)
+
+- 🟢 **Complete (Finished)**  
+  Flashing green for ~10 seconds, then returns to idle
 
 
