@@ -24,9 +24,9 @@ Modified and extended by me **drc85**
  → https://makerworld.com/de/models/2686608-snapmaker-u1-led-status-bar-wled-esp32-gledopto#profileId-2976228
 
 
-
   <img width="529" height="261" alt="Screenshot 2026-04-19 194245" src="https://github.com/user-attachments/assets/a6e5ad3b-25d1-4d37-b5a5-b3bbbb56d3e9" />
-
+  
+---
 
 ## 🚀 Installation
 
@@ -34,22 +34,19 @@ Modified and extended by me **drc85**
 2. Flash it to your ESP32 (there are a ton of tutorials online)
 3. Set up WiFi in WLED
 
-3.1 After flashing: Open WLED UI - Navigate to **Usermods**- A new section called **SnapmakerU1** will appear
+3.1. After flashing: Open WLED UI - Navigate to **Usermods**- A new section called **SnapmakerU1** will appear
 
-3.2 Enter: Printer IP - API key (optional, leave empty if not used) Reboot the device.
+3.2. Enter: Printer IP - API key (optional, leave empty if not used) Reboot the device.
 ----takes maximal 10minutes!!!
 4. print case (two options availible - under the build plate and directly on the bottom of the printer)
-
+ → https://makerworld.com/de/models/2686608-snapmaker-u1-led-status-bar-wled-esp32-gledopto#profileId-2976228
 5. place controller and led inside
 6. screw on the top part
 7. add some 3M vhb tape and stick it on 
-
 8. place it inside the printer
-
 9. drill a hole in the floor, backwall or fiddle it thorugh the side wall ( with the buildplate cable) and drill lthe hole on the back
 
- 
-
+ ---
  
 
 ## 💡 LED Status Overview
