@@ -22,6 +22,8 @@ Modified and extended by me **drc85**
 - double sided 3M VHB tape
 - led mounting case  (two options availible - under the build plate and directly on the bottom of the printer)
  → https://makerworld.com/de/models/2686608-snapmaker-u1-led-status-bar-wled-esp32-gledopto#profileId-2976228
+- paxx firmware
+→ https://github.com/paxx12/SnapmakerU1-Extended-Firmware
 
 
   <img width="529" height="261" alt="Screenshot 2026-04-19 194245" src="https://github.com/user-attachments/assets/a6e5ad3b-25d1-4d37-b5a5-b3bbbb56d3e9" />
@@ -29,6 +31,9 @@ Modified and extended by me **drc85**
 ---
 
 ## 🚀 Installation
+
+NOTE: you have to be on Paxx FW 
+→ https://github.com/paxx12/SnapmakerU1-Extended-Firmware
 
 ### 1. Flash firmware
 - Download `firmware.bin`:  
