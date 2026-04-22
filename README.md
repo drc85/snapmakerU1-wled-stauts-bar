@@ -84,25 +84,46 @@ NOTE:
 
  ---
  
+## 🚦 LED States
 
-## 💡 LED Status Overview
+**⚪ Idle**  
+White breathing (smooth pulse)
 
-- ⚪ **Idle / Standby**  
- Solid white
+**🟡 Preparing / Preheat**  
+Orange running light (→)  
+Pattern: 50% – 50% – 75% – 100% – 50%
 
-- 🟡 **Preparing / Preheat / Calibration**  
- Smooth pulsing orange (dim ↔ bright, never fully off)
+**🟢 Printing**  
+Green progress bar  
+- New LED → blinks 2×  
+- Existing LEDs → stay solid  
+- Remaining LEDs → dim white
 
-- 🟢 **Printing**  
- - Progress LEDs = green  
- - Remaining LEDs = full white  
- - Always at least 1 LED active (16 LEDs total)
+**🔵 Paused**  
+Blue running light (same pattern as preheat)
 
-- 🔵 **Paused**  
- Smooth pulsing blue (dim ↔ bright, never fully off)
+**🔴 Error**  
+Fast red blinking (on/off)
 
-- 🔴 **Error**  
- Flashing red (dim ↔ bright, never fully off)
+**🟢 Complete**  
+Fast green blinking (~10s) → returns to Idle
 
-- 🟢 **Complete**  
- Flashing green (~10 seconds), then returns to idle
+---
+
+## 🌊 Startup Animation (16 LEDs)
+
+- Outside → center (0+15 → 7+8)  
+- Center holds briefly  
+- Expands back outward  
+- Short full-white phase  
+- Seamless transition into Idle  
+
+---
+
+## ✨ Features
+
+- Stable preheat detection (no early green)
+- Smooth idle breathing
+- No WiFi flicker / false error
+- Clean symmetric animations (16 LEDs)
+- Visual feedback on progress steps
