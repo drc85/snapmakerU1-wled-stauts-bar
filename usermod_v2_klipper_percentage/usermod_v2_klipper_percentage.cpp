@@ -20,7 +20,7 @@ private:
   bool startupActive = true;
   unsigned long startupStart = 0;
 
-  // 👉 NUR für Progress Blink (neu)
+  // 👉 NEU (nur für progress blink)
   int lastLit = -1;
   int blinkIndex = -1;
   unsigned long blinkUntil = 0;
@@ -40,7 +40,7 @@ private:
     fillAll(RGBW32(v,v,v,0));
   }
 
-  // 🔥 DEIN NEUES RUNNING LIGHT
+  // 🔥 NUR DAS geändert
   void runningLight(uint8_t r, uint8_t g, uint8_t b) {
     uint16_t n = strip.getLengthTotal();
     uint16_t pos = (millis() / 150) % n;
@@ -48,45 +48,38 @@ private:
     for (uint16_t i = 0; i < n; i++) {
       int d = (int)i - (int)pos;
 
-      if (d == 0) {
-        strip.setPixelColor(i, RGBW32(r, g, b, 0)); // 100%
-      } else if (d == -1) {
-        strip.setPixelColor(i, RGBW32(r * 3 / 4, g * 3 / 4, b * 3 / 4, 0)); // 75%
-      } else if (d == -2 || d == 1 || d == 2) {
-        strip.setPixelColor(i, RGBW32(r / 2, g / 2, b / 2, 0)); // 50%
-      } else {
-        strip.setPixelColor(i, 0);
-      }
+      if (d == 0) strip.setPixelColor(i, RGBW32(r,g,b,0));                 // 100%
+      else if (d == -1) strip.setPixelColor(i, RGBW32(r*3/4,g*3/4,b*3/4,0));// 75%
+      else if (d == -2 || d == 1 || d == 2)
+        strip.setPixelColor(i, RGBW32(r/2,g/2,b/2,0));                      // 50%
+      else strip.setPixelColor(i, 0);
     }
   }
 
-  // 🔥 NUR HIER ERWEITERT
+  // 🔥 NUR DAS erweitert
   void drawProgressBar(float p) {
     uint16_t n = strip.getLengthTotal();
     uint16_t lit = max((uint16_t)1, (uint16_t)(p * n));
 
-    // neue LED erkannt
-    if ((int)lit - 1 != lastLit) {
+    if (lastLit == -1) {
+      lastLit = lit - 1;
+    } else if ((int)lit - 1 != lastLit) {
       blinkIndex = lit - 1;
       blinkUntil = millis() + 400;
       lastLit = lit - 1;
     }
 
-    bool blink = ((millis() / 100) % 2) == 0;
+    bool blink = ((millis()/100)%2)==0;
 
     for (uint16_t i = 0; i < n; i++) {
-
       if (i < lit) {
-
         if ((int)i == blinkIndex && millis() < blinkUntil) {
           strip.setPixelColor(i, blink ? RGBW32(0,255,0,0) : 0);
         } else {
           strip.setPixelColor(i, RGBW32(0,255,0,0));
         }
-
       } else {
-        // 👉 dunkleres weiß
-        strip.setPixelColor(i, RGBW32(80,80,80,0));
+        strip.setPixelColor(i, RGBW32(80,80,80,0)); // dunkler
       }
     }
   }
@@ -233,23 +226,6 @@ public:
     }
 
     idlePulse();
-  }
-
-  void addToConfig(JsonObject &root) override {
-    JsonObject top = root.createNestedObject(FPSTR(_name));
-    top["ip"] = snapIp;
-    top["port"] = snapPort;
-    top["api"] = apiKey;
-  }
-
-  bool readFromConfig(JsonObject &root) override {
-    JsonObject top = root[FPSTR(_name)];
-    if (top.isNull()) return false;
-
-    snapIp = top["ip"] | "";
-    snapPort = top["port"] | 7125;
-    apiKey = top["api"] | "";
-    return true;
   }
 
   uint16_t getId() override { return 0xBEEF; }
