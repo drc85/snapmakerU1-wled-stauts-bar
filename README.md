@@ -1,6 +1,6 @@
 #Snapmaker U1 WLED Status Bar 
 -----------------------------
-Snapstatus
+U1Snapstatus V1.0
 ---------------------------
 WLED-based LED status bar for the Snapmaker U1.
 
